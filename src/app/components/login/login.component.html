@@ -1,0 +1,40 @@
+<div *ngIf="loggedIn; else loginFormTpl" class="container mt-5">
+  <div class="alert alert-info text-center">
+    <p>You are already logged in.</p>
+    <button class="btn btn-danger" (click)="onLogout()">Logout</button>
+  </div>
+</div>
+<ng-template #loginFormTpl>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-body">
+            <h3 class="card-title mb-4 text-center">Login</h3>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input class="form-control" formControlName="user" placeholder="Enter username" />
+                <div class="text-danger small" *ngIf="loginForm.get('user')?.errors?.['required'] && (loginForm.get('user')?.dirty || loginForm.get('user')?.touched)">
+                  Username required.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" formControlName="pass" placeholder="Enter password" />
+                <div class="text-danger small" *ngIf="loginForm.get('pass')?.errors?.['required'] && (loginForm.get('pass')?.dirty || loginForm.get('pass')?.touched)">
+                  Password required.
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100" [disabled]="loading">Login</button>
+              <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+              <div *ngIf="loading" class="text-center mt-2">
+                <span class="spinner-border spinner-border-sm"></span> Logging in...
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

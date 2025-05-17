@@ -1,0 +1,95 @@
+{
+  "cattle": [
+    {
+      "id": "1",
+      "breed": "Deshi",
+      "weight": 280,
+      "price": 95000,
+      "available": true
+    },
+    {
+      "id": "2",
+      "breed": "Shahiwal",
+      "weight": 350,
+      "price": 120000,
+      "available": false
+    },
+    {
+      "id": "3",
+      "breed": "North Bengal Bull",
+      "weight": 400,
+      "price": 145000,
+      "available": true
+    },
+    {
+      "id": "4",
+      "breed": "Pabna",
+      "weight": 370,
+      "price": 132000,
+      "available": true
+    },
+    {
+      "id": "5",
+      "breed": "Mirkadim",
+      "weight": 320,
+      "price": 110000,
+      "available": true
+    },
+    {
+      "id": "6",
+      "breed": "Red Chittagong",
+      "weight": 390,
+      "price": 138000,
+      "available": false
+    },
+    {
+      "id": "7",
+      "breed": "Munshiganj Local",
+      "weight": 310,
+      "price": 102000,
+      "available": true
+    },
+    {
+      "id": "8",
+      "breed": "Rajshahi Bull",
+      "weight": 430,
+      "price": 158000,
+      "available": true
+    },
+    {
+      "id": "9",
+      "breed": "Sylhet Local",
+      "weight": 340,
+      "price": 125000,
+      "available": true
+    },
+    {
+      "id": "10",
+      "breed": "Kushtia Cross",
+      "weight": 360,
+      "price": 130000,
+      "available": false
+    },
+    {
+      "id": "ed7e",
+      "breed": "Demo feed",
+      "weight": 200,
+      "price": 120,
+      "available": true
+    },
+    {
+      "id": "10b8",
+      "breed": "Chittagong",
+      "weight": 120,
+      "price": 50,
+      "available": true
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "1234"
+    }
+  ]
+}

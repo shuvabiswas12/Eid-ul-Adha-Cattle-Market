@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h3 class="card-title mb-4 text-center">Add New Cattle</h3>
+          <form [formGroup]="cattleForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label class="form-label">Breed</label>
+              <input class="form-control" formControlName="breed" placeholder="Enter breed" />
+              <div class="text-danger small" *ngIf="cattleForm.get('breed')?.errors?.['required'] && (cattleForm.get('breed')?.dirty || cattleForm.get('breed')?.touched)">
+                Breed required.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Weight (kg)</label>
+              <input type="number" class="form-control" formControlName="weight" placeholder="Enter weight" />
+              <div class="text-danger small" *ngIf="cattleForm.get('weight')?.errors?.['min'] && (cattleForm.get('weight')?.dirty || cattleForm.get('weight')?.touched)">
+                Weight must be greater than 0.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" formControlName="price" placeholder="Enter price" />
+              <div class="text-danger small" *ngIf="cattleForm.get('price')?.errors?.['min'] && (cattleForm.get('price')?.dirty || cattleForm.get('price')?.touched)">
+                Price must be greater than 0.
+              </div>
+            </div>
+            <div class="form-check mb-3">
+              <input type="checkbox" class="form-check-input" formControlName="available" id="availableCheck" />
+              <label class="form-check-label" for="availableCheck">Available</label>
+            </div>
+            <button type="submit" class="btn btn-success w-100" [disabled]="loading">Add Cattle</button>
+            <div *ngIf="cattleForm.invalid && (cattleForm.dirty || cattleForm.touched)" class="text-danger mt-2">
+              Please fix the errors above.
+            </div>
+            <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+            <div *ngIf="success" class="alert alert-success mt-3">{{ success }}</div>
+            <div *ngIf="loading" class="text-center mt-2">
+              <span class="spinner-border spinner-border-sm"></span> Adding...
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

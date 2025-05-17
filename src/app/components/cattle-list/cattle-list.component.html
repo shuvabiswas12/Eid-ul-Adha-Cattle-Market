@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">Cattle List</h2>
+  <div *ngIf="loading" class="text-center my-4">
+    <div class="spinner-border"></div>
+    <div>Loading...</div>
+  </div>
+  <div *ngIf="error" class="alert alert-danger text-center">{{ error }}</div>
+  <div class="row g-4">
+    <div class="col-md-6 col-lg-4" *ngFor="let cattle of cattleList">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ cattle.breed }}</h5>
+          <p class="card-text mb-1">
+            <strong>Weight:</strong> {{ cattle.weight }} kg
+          </p>
+          <p class="card-text mb-1">
+            <strong>Price:</strong> <span class="text-success">{{ cattle.price | price }}</span>
+          </p>
+          <span class="badge mb-2" [ngClass]="cattle.available ? 'bg-success' : 'bg-secondary'">
+            {{ cattle.available ? 'Available' : 'Sold' }}
+          </span>
+          <button class="btn btn-outline-primary w-100" (click)="toggleAvailability(cattle)">
+            Mark as {{ cattle.available ? 'Sold' : 'Available' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

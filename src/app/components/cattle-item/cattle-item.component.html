@@ -1,0 +1,5 @@
+<div>
+  <strong>{{ cattle.breed }}</strong> - {{ cattle.weight }}kg - {{ cattle.price }}
+  <span *ngIf="cattle.available">Available</span>
+  <span *ngIf="!cattle.available">Sold</span>
+</div>
