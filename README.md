@@ -1,6 +1,6 @@
 # Eid-ul-Adha Cattle Market
 
-A simple Angular application to manage cattle listings for Eid-ul-Adha, featuring authentication, cattle management, and a mock backend API.
+A simple Angular application to manage cattle listings for Eid-ul-Adha, featuring authentication, cattle management, and a mock backend API using json-server.
 
 ## Features
 - **Login/Logout**: Secure the app with basic authentication (admin/1234).
@@ -12,6 +12,12 @@ A simple Angular application to manage cattle listings for Eid-ul-Adha, featurin
 - **Standalone Components**: Modern Angular structure.
 - **Error Handling**: User-friendly error messages for API failures.
 
+## Route Paths
+- `/login` — Login page
+- `/logout` — Logout (logs out and redirects to login)
+- `/cattle` — View all cattle (protected)
+- `/add` — Add new cattle (protected)
+
 ## Getting Started
 
 ### 1. Install Dependencies
@@ -19,54 +25,54 @@ A simple Angular application to manage cattle listings for Eid-ul-Adha, featurin
 npm install
 ```
 
-### 2. Start the Mock API
+### 2. Start the Mock API (json-server)
 ```
-npm run api
+npx json-server --watch db.json
 ```
 - The API runs at [http://localhost:3000](http://localhost:3000)
 - Login credentials: **user:** `admin` | **pass:** `1234`
 
 ### 3. Start the Angular App
 ```
-npm start
+ng serve
+```
+**or**
+```
+npm run start
 ```
 - The app runs at [http://localhost:4200](http://localhost:4200)
 
 ## API Endpoints
-- `POST /auth/login` — Authenticate (returns token)
-- `POST /auth/logout` — Logout
+- `POST /login` — Authenticate (returns token)
+- `POST /logout` — Logout
 - `GET /cattle` — List all cattle
 - `POST /cattle` — Add new cattle
 - `PATCH /cattle/{id}` — Update cattle (e.g., availability)
 
-## Explanations & Design Decisions
+## About json-server
+- [json-server](https://github.com/typicode/json-server) is used to mock a REST API for development.
+- The data is stored in `db.json` in the project root.
+- You can edit `db.json` to add or modify cattle and users.
+- To start the server, use:
+  ```
+  npx json-server --watch db.json
+  ```
 
-### Interceptors
-- **`AuthInterceptor`** attaches the JWT token to all outgoing API requests after login.
-- Registered globally in `app.config.ts`.
-
-### Reactive Forms
-- Used for both login and add cattle forms.
-- Includes validation for required fields and numeric constraints.
-
-### HttpClient
-- All API interactions use Angular's `HttpClient` via services.
-- Error handling is implemented for all requests.
-
-### Pipes
-- **`PricePipe`** formats numbers as PKR currency (e.g., `₨120,000`).
-- Used in the cattle list for price display.
-
-### Standalone Components
-- All components are standalone (no NgModules).
-- Each component declares its own dependencies.
-
-### Route Guards
-- **`authGuard`** protects cattle management routes, redirecting unauthenticated users to login.
-
-### Mock API
-- Uses `json-server` with a custom `server.js` for authentication simulation.
-- Easy to extend for more features.
+## About the Proxy (CORS Fix)
+- Angular runs on port 4200 and json-server runs on port 3000, which causes CORS issues by default.
+- A proxy configuration (`proxy.config.json`) is used to forward API requests from Angular to json-server, avoiding CORS errors.
+- The proxy file includes:
+  ```json
+  {
+    "/cattle": {
+      "target": "http://localhost:3000",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+  }
+  ```
+- Make sure to use **relative URLs** (e.g., `/cattle`, `/login`) in your Angular code.
 
 ## Folder Structure
 - `src/app/components/` — Standalone components
@@ -76,8 +82,3 @@ npm start
 
 ## Notes
 - Focus is on functionality and code quality over extensive styling.
-- You can further enhance the UI or add more features as needed.
-
----
-
-**Enjoy managing your Eid-ul-Adha Cattle Market!**
